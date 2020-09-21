@@ -1,4 +1,4 @@
-package com.neo.service;
+package com.neo.definition.service;
 
 /**
  * @author Neo

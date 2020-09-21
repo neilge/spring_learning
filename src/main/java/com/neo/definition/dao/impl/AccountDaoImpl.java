@@ -1,6 +1,6 @@
-package com.neo.dao.impl;
+package com.neo.definition.dao.impl;
 
-import com.neo.dao.AccountDao;
+import com.neo.definition.dao.AccountDao;
 
 /**
  * @author Neo

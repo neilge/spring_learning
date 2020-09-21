@@ -1,4 +1,4 @@
-package com.neo.dao;
+package com.neo.definition.dao;
 
 /**
  * @author Neo
