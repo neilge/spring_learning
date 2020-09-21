@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--  创建Bean的三种方式  -->
+    <!--  1. 使用默认构造函数 在spring的配置文件中使用bean标签, 配以id和class属性后, 并且没有其他属性和标签时. 采用的就是默认构造函数创建. 如果此时没有默认构造函数, 则对象无法创建.   -->
+    <bean id="accountService" class="com.neilge.service.impl.AccountServiceImpl"></bean>
+    <bean id="accountDao" class="com.neilge.dao.impl.AccountDaoImpl"></bean>
+    <!--  2. 使用普通工厂中的方法创建对象 -->
+    <!--    <bean id="instanceFactory" class="com.neilge.factory.InstanceFactory"></bean>-->
+    <!--    <bean id="accountService" factory-bean="InstanceFactory" factory-method="getAccountService"></bean>-->
+    <!--  3. 使用静态工厂中的静态方法  -->
+    <!--    <bean id="accountService" class="com.neilge.factory.StaticFactory"></bean>-->
+    <!--    <bean id="accountService" factory-bean="StaticFactory" factory-method="getAccountService"></bean>-->
+
+    <!--  bean的作用范围: Scope属性, bean的作用范围  -->
+    <!--    singleton: 单例的
+            prototype: 非单例
+            request: 作用于web应用的请求范围
+            session: 作用于web应用的会话范围
+            global-session: 作用于集群环境的会话范围 (全局会话范围), 当不是集群环境时, 等同于session.
+      -->
+
+
+    <!--  bean的生命周期  -->
+    <!--  singleton: 单例对象声明周期与容器的相同.   -->
+    <!--  prototype:
+              出生: 当使用对象时, 对象才会被创建.
+              活着: 对象使用过程中.
+              死亡: 当对象长时间不用, 且没有别的对象引用时, 由java 垃圾回收清除.
+              -->
+</beans>
