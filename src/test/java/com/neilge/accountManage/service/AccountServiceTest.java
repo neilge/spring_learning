@@ -2,12 +2,10 @@ package com.neilge.accountManage.service;
 
 import com.neilge.accountManage.config.SpringConfiguration;
 import com.neilge.accountManage.domain.Account;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -21,17 +19,9 @@ import java.util.List;
 @ContextConfiguration(classes = SpringConfiguration.class)
 public class AccountServiceTest {
 
-//    ApplicationContext context;
-
     @Autowired
+    @Qualifier("ProxyAccountService")
     AccountService service;
-
-//    @Before
-//    public void setUp() {
-////        context = new ClassPathXmlApplicationContext("accountbean.xml");
-//        context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
-//        service = context.getBean("accountService", AccountService.class);
-//    }
 
     @Test
     public void testFindAll() {
