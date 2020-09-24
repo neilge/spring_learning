@@ -29,8 +29,8 @@ public class JdbcConfig {
 
     @Bean("runner")
     @Scope("prototype")
-    public QueryRunner createQueryRunner(DataSource dataSource) {
-        return new QueryRunner(dataSource);
+    public QueryRunner createQueryRunner() {
+        return new QueryRunner();
     }
 
     @Bean("dataSource")

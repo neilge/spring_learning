@@ -19,4 +19,6 @@ public interface AccountService {
     void updateAccount(Account account);
 
     void deleteAccount(Integer accountId);
+
+    void transfer(String sourceName, String targetName, Float money);
 }

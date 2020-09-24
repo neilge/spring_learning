@@ -67,4 +67,9 @@ public class AccountServiceTest {
     public void testDelete() {
         service.deleteAccount(2);
     }
+
+    @Test
+    public void testTransfer() {
+        service.transfer("aaa", "ccc", 100f);
+    }
 }
