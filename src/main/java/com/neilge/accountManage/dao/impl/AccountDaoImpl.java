@@ -5,6 +5,8 @@ import com.neilge.accountManage.domain.Account;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -12,8 +14,10 @@ import java.util.List;
  * @author Neo
  * @since 09/21/2020-10:43 PM
  */
+@Repository("accountDao")
 public class AccountDaoImpl implements AccountDao {
 
+    @Autowired
     private QueryRunner runner;
 
     @Override
@@ -59,9 +63,5 @@ public class AccountDaoImpl implements AccountDao {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public void setRunner(QueryRunner runner) {
-        this.runner = runner;
     }
 }

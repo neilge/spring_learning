@@ -3,6 +3,8 @@ package com.neilge.accountManage.service.impl;
 import com.neilge.accountManage.dao.AccountDao;
 import com.neilge.accountManage.domain.Account;
 import com.neilge.accountManage.service.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -10,8 +12,10 @@ import java.util.List;
  * @author Neo
  * @since 09/21/2020-10:39 PM
  */
+@Service("accountService")
 public class AccountServiceImpl implements AccountService {
 
+    @Autowired
     private AccountDao accountDao;
 
     @Override
@@ -37,9 +41,5 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void deleteAccount(Integer accountId) {
         accountDao.deleteAccount(accountId);
-    }
-
-    public void setAccountDao(AccountDao accountDao) {
-        this.accountDao = accountDao;
     }
 }
