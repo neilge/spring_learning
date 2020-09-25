@@ -1,6 +1,7 @@
 package com.neilge.accountManage.config;
 
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 
@@ -11,5 +12,6 @@ import org.springframework.context.annotation.PropertySource;
 @ComponentScan("com.neilge.accountManage")
 @PropertySource("classpath:jdbcConfig.properties")
 @Import(JdbcConfig.class)
+@EnableAspectJAutoProxy
 public class SpringConfiguration {
 }

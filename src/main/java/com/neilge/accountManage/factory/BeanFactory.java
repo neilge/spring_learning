@@ -1,50 +1,45 @@
 package com.neilge.accountManage.factory;
 
-import com.neilge.accountManage.service.AccountService;
 import com.neilge.accountManage.util.TransactionManager;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
 
 /**
  * @author Neo
  * @since 09/24/2020-3:40 PM
  */
 @Component
+@Aspect
 public class BeanFactory {
-
-    @Autowired
-    private AccountService accountService;
 
     @Autowired
     private TransactionManager txManager;
 
-    @Bean("ProxyAccountService")
-    public AccountService getAccountService() {
-        return (AccountService) Proxy.newProxyInstance(accountService.getClass().getClassLoader(), accountService.getClass().getInterfaces(), new InvocationHandler() {
-            Object result = null;
+    @Pointcut("execution(* com.neilge.accountManage.service.impl.*.*(..))")
+    private void pointCut() {
+    }
 
-            @Override
-            public Object invoke(Object proxy, Method method, Object[] args) {
-                try {
-                    txManager.beginTransaction();
-                    System.out.println("Transaction start!!!");
-                    result = method.invoke(accountService, args);
-                    txManager.commit();
-                    return result;
-                } catch (Exception e) {
-                    System.out.println("Transaction fail!!!");
-                    txManager.rollback();
-                    throw new RuntimeException(e);
-                } finally {
-                    System.out.println("Transaction complete!!!");
-                    txManager.releaseConnection();
-                }
-            }
-        });
+    @Around("pointCut()")
+    public Object aroundTransaction(ProceedingJoinPoint joinPoint) {
+        Object result = null;
+        try {
+            txManager.beginTransaction();
+            System.out.println("Aspect transaction before!!!");
+            result = joinPoint.proceed(joinPoint.getArgs());
+            System.out.println("Aspect transaction after!!!");
+            txManager.commit();
+            return result;
+        } catch (Throwable e) {
+            System.out.println("Aspect transaction fail!!!");
+            txManager.rollback();
+            throw new RuntimeException(e);
+        } finally {
+            System.out.println("Aspect transaction complete!!!");
+            txManager.releaseConnection();
+        }
     }
 }
